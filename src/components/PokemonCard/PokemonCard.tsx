@@ -1,6 +1,8 @@
 import { FunctionComponent, useState } from "react";
 import Pokemon from "../../models/pokemon";
 import "./PokemonCard.css";
+import { formatDate } from "../../helpers/formatDate";
+import formatType from "../../helpers/formatType";
 
 type props = {
   pokemon: Pokemon;
@@ -35,8 +37,14 @@ const PokemonCard: FunctionComponent<props> = ({
           <div className="card-content">
             <p>{pokemon.name}</p>
             <p>
-              <small> {pokemon.created.toString()} </small>
+              <small> {formatDate(pokemon.created)} </small>
             </p>
+
+            {pokemon.types.map((type) => (
+              <span key={type} className={formatType(type)}>
+                {type}{" "}
+              </span>
+            ))}
           </div>
         </div>
       </div>
