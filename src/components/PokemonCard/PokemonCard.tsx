@@ -3,6 +3,7 @@ import Pokemon from "../../models/pokemon";
 import "./PokemonCard.css";
 import { formatDate } from "../../helpers/formatDate";
 import formatType from "../../helpers/formatType";
+import { Link } from "react-router-dom";
 
 type props = {
   pokemon: Pokemon;
@@ -29,25 +30,27 @@ const PokemonCard: FunctionComponent<props> = ({
       onMouseEnter={showBorder}
       onMouseLeave={hideBorder}
     >
-      <div className="card horizontal" style={{ borderColor: color }}>
-        <div className="card-image">
-          <img src={pokemon.picture} alt={pokemon.name} />
-        </div>
-        <div className="card-stacked">
-          <div className="card-content">
-            <p>{pokemon.name}</p>
-            <p>
-              <small> {formatDate(pokemon.created)} </small>
-            </p>
+      <Link to={`pokemons/${pokemon.id}`}>
+        <div className="card horizontal" style={{ borderColor: color }}>
+          <div className="card-image">
+            <img src={pokemon.picture} alt={pokemon.name} />
+          </div>
+          <div className="card-stacked">
+            <div className="card-content">
+              <p>{pokemon.name}</p>
+              <p>
+                <small> {formatDate(pokemon.created)} </small>
+              </p>
 
-            {pokemon.types.map((type) => (
-              <span key={type} className={formatType(type)}>
-                {type}{" "}
-              </span>
-            ))}
+              {pokemon.types.map((type) => (
+                <span key={type} className={formatType(type)}>
+                  {type}{" "}
+                </span>
+              ))}
+            </div>
           </div>
         </div>
-      </div>
+      </Link>
     </div>
   );
 };
