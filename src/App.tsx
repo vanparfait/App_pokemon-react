@@ -16,8 +16,8 @@ const App: FunctionComponent = () => {
           </div>
         </nav>
         <Routes>
-          <Route exact path="/" element={<PokemonList />} />
-          <Route exact path="/pokemons" element={<PokemonList />} />
+          <Route path="/" element={<PokemonList />} />
+          <Route path="/pokemons" element={<PokemonList />} />
 
           <Route path="/pokemons/:id" element={<PokemonsDetail />} />
         </Routes>
