@@ -75,10 +75,119 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
     return (form.types.value as string[]).includes(type);
   };
 
+  const validateForm = () => {
+    let newForm: Form = form;
+
+    const start = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/";
+    const end = ".png";
+
+    if (
+      !form.picture.value.startsWith(start) ||
+      !form.picture.value.endsWith(end)
+    ) {
+      const errorMsg: string = "L'url n'est pas valide.";
+      const newField: Field = {
+        value: form.picture.value,
+        error: errorMsg,
+        isValid: false,
+      };
+      newForm = { ...newForm, ...{ picture: newField } };
+    } else {
+      const newField: Field = {
+        value: form.picture.value,
+        error: "",
+        isValid: true,
+      };
+      newForm = { ...newForm, ...{ picture: newField } };
+    }
+
+    // Validator name
+    if (!/^[a-zA-Zàéè ]{3,25}$/.test(form.name.value)) {
+      const errorMsg: string = "Le nom du pokémon est requis (1-25).";
+      const newField: Field = {
+        value: form.name.value,
+        error: errorMsg,
+        isValid: false,
+      };
+      newForm = { ...newForm, ...{ name: newField } };
+    } else {
+      const newField: Field = {
+        value: form.name.value,
+        error: "",
+        isValid: true,
+      };
+      newForm = { ...newForm, ...{ name: newField } };
+    }
+
+    // Validator hp
+    if (!/^[0-9]{1,3}$/.test(form.hp.value)) {
+      const errorMsg: string =
+        "Les points de vie du pokémon sont compris entre 0 et 999.";
+      const newField: Field = {
+        value: form.hp.value,
+        error: errorMsg,
+        isValid: false,
+      };
+      newForm = { ...newForm, ...{ hp: newField } };
+    } else {
+      const newField: Field = {
+        value: form.hp.value,
+        error: "",
+        isValid: true,
+      };
+      newForm = { ...newForm, ...{ hp: newField } };
+    }
+
+    // Validator cp
+    if (!/^[0-9]{1,2}$/.test(form.cp.value)) {
+      const errorMsg: string =
+        "Les dégâts du pokémon sont compris entre 0 et 99";
+      const newField: Field = {
+        value: form.cp.value,
+        error: errorMsg,
+        isValid: false,
+      };
+      newForm = { ...newForm, ...{ cp: newField } };
+    } else {
+      const newField: Field = {
+        value: form.cp.value,
+        error: "",
+        isValid: true,
+      };
+      newForm = { ...newForm, ...{ cp: newField } };
+    }
+
+    setForm(newForm);
+    return newForm.name.isValid && newForm.hp.isValid && newForm.cp.isValid;
+  };
+
+  const isTypesValid = (type: string): boolean => {
+    // Cas n°1: Le pokémon a un seul type, qui correspond au type passé en paramètre.
+    // Dans ce cas on revoie false, car l'utilisateur ne doit pas pouvoir décoché ce type (sinon le pokémon aurait 0 type, ce qui est interdit)
+    if (form.types.value.length === 1 && hasType(type)) {
+      return false;
+    }
+
+    // Cas n°1: Le pokémon a au moins 3 types.
+    // Dans ce cas il faut empêcher à l'utilisateur de cocher un nouveau type, mais pas de décocher les types existants.
+    if (form.types.value.length >= 3 && !hasType(type)) {
+      return false;
+    }
+
+    // Après avoir passé les deux tests ci-dessus, on renvoie 'true',
+    // c'est-à-dire que l'on autorise l'utilisateur à cocher ou décocher un nouveau type.
+    return true;
+  };
+
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(form);
-    navigate(`/pokemons/${pokemon.id}`);
+    const isFormValid = validateForm();
+
+    if (isFormValid) {
+      navigate(`/pokemons/${pokemon.id}`);
+    } else {
+      console.log("jjjjjj");
+    }
   };
 
   return (
@@ -144,6 +253,7 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
                           value={type}
                           checked={hasType(type)}
                           onChange={(e) => selectType(type, e)}
+                          disabled={!isTypesValid(type)}
                         ></input>
                         <span>
                           <p className={formatType(type)}>{type}</p>
