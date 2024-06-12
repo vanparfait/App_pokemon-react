@@ -78,32 +78,10 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
   const validateForm = () => {
     let newForm: Form = form;
 
-    const start = "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/";
-    const end = ".png";
-
-    if (
-      !form.picture.value.startsWith(start) ||
-      !form.picture.value.endsWith(end)
-    ) {
-      const errorMsg: string = "L'url n'est pas valide.";
-      const newField: Field = {
-        value: form.picture.value,
-        error: errorMsg,
-        isValid: false,
-      };
-      newForm = { ...newForm, ...{ picture: newField } };
-    } else {
-      const newField: Field = {
-        value: form.picture.value,
-        error: "",
-        isValid: true,
-      };
-      newForm = { ...newForm, ...{ picture: newField } };
-    }
-
     // Validator name
     if (!/^[a-zA-Zàéè ]{3,25}$/.test(form.name.value)) {
-      const errorMsg: string = "Le nom du pokémon est requis (1-25).";
+      const errorMsg: string =
+        "Le nom du pokémon est requis (1-25) ou les caracteres speciaux ne sont pas autorisees.";
       const newField: Field = {
         value: form.name.value,
         error: errorMsg,
@@ -215,6 +193,11 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
                     value={form.name.value as string}
                     onChange={(e) => handleInputChange(e)}
                   ></input>
+                  {form.name.error && (
+                    <div className="card-panel red accent-1">
+                      {form.name.error}
+                    </div>
+                  )}
                 </div>
                 {/* Pokemon hp */}
                 <div className="form-group">
@@ -227,6 +210,11 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
                     value={form.hp.value as number}
                     onChange={(e) => handleInputChange(e)}
                   ></input>
+                  {form.hp.error && (
+                    <div className="card-panel red accent-1">
+                      {form.hp.error}
+                    </div>
+                  )}
                 </div>
                 {/* Pokemon cp */}
                 <div className="form-group">
@@ -239,6 +227,11 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
                     value={form.cp.value as number}
                     onChange={(e) => handleInputChange(e)}
                   ></input>
+                  {form.cp.error && (
+                    <div className="card-panel red accent-1">
+                      {form.cp.error}
+                    </div>
+                  )}
                 </div>
                 {/* Pokemon types */}
                 <div className="form-group">
