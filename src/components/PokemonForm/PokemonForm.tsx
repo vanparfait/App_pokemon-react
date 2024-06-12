@@ -1,6 +1,7 @@
 import { FunctionComponent, useState } from "react";
 import formatType from "../../helpers/formatType";
 import Pokemon from "../../models/pokemon";
+import { useNavigate } from "react-router-dom";
 
 type Props = {
   pokemon: Pokemon;
@@ -24,6 +25,8 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
     cp: { value: pokemon.cp, isValid: true },
     types: { value: pokemon.types, isValid: true },
   });
+
+  const navigate = useNavigate();
 
   const types: string[] = [
     "Plante",
@@ -55,11 +58,11 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
 
     if (checked) {
       // Si l'utilisateur coche un type, à l'ajoute à la liste des types du pokémon.
-      const newTypes: string[] = form.types.value.concat([type]);
+      const newTypes: string[] = (form.types.value as string[]).concat([type]);
       newField = { value: newTypes };
     } else {
       // Si l'utilisateur décoche un type, on le retire de la liste des types du pokémon.
-      const newTypes: string[] = form.types.value.filter(
+      const newTypes: string[] = (form.types.value as string[]).filter(
         (currentType: string) => currentType !== type
       );
       newField = { value: newTypes };
@@ -72,8 +75,14 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
     return (form.types.value as string[]).includes(type);
   };
 
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    console.log(form);
+    navigate(`/pokemons/${pokemon.id}`);
+  };
+
   return (
-    <form>
+    <form onSubmit={(e) => handleSubmit(e)}>
       <div className="row">
         <div className="col s12 m8 offset-m2">
           <div className="card hoverable">
