@@ -57,7 +57,7 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
     let newField: Field;
 
     if (checked) {
-      // Si l'utilisateur coche un type, à l'ajoute à la liste des types du pokémon.
+      // Si l'utilisateur coche un type, à l'ajoute à la liste des types du pokémon
       const newTypes: string[] = (form.types.value as string[]).concat([type]);
       newField = { value: newTypes };
     } else {
@@ -81,7 +81,7 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
     // Validator name
     if (!/^[a-zA-Zàéè ]{3,25}$/.test(form.name.value)) {
       const errorMsg: string =
-        "Le nom du pokémon est requis (1-25) ou les caracteres speciaux ne sont pas autorisees.";
+        "Le nom du pokémon est requis (1-25) ou les caracteres speciaux ne sont pas autorisees..";
       const newField: Field = {
         value: form.name.value,
         error: errorMsg,
