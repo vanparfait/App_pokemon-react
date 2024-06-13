@@ -142,13 +142,13 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
   const isTypesValid = (type: string): boolean => {
     // Cas n°1: Le pokémon a un seul type, qui correspond au type passé en paramètre.
     // Dans ce cas on revoie false, car l'utilisateur ne doit pas pouvoir décoché ce type (sinon le pokémon aurait 0 type, ce qui est interdit)
-    if (form.types.value.length === 1 && hasType(type)) {
+    if ((form.types.value as string).length === 1 && hasType(type)) {
       return false;
     }
 
     // Cas n°1: Le pokémon a au moins 3 types.
     // Dans ce cas il faut empêcher à l'utilisateur de cocher un nouveau type, mais pas de décocher les types existants.
-    if (form.types.value.length >= 3 && !hasType(type)) {
+    if ((form.types.value as string).length >= 3 && !hasType(type)) {
       return false;
     }
 
