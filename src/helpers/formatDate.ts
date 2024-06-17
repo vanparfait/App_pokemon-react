@@ -1,3 +1,3 @@
-export  const formatDate = (date: Date): string => {
+export  const formatDate = (date: Date = new Date()): string => {
     return `${date.getDate()}/ ${date.getMonth() + 1}/ ${date.getFullYear()}`;
   };
