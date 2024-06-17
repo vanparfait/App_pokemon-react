@@ -79,7 +79,7 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
     let newForm: Form = form;
 
     // Validator name
-    if (!/^[a-zA-Zàéè ]{3,25}$/.test(form.name.value)) {
+    if (!/^[a-zA-Zàéè ]{3,25}$/.test(form.name.value as string)) {
       const errorMsg: string =
         "Le nom du pokémon est requis (1-25) ou les caracteres speciaux ne sont pas autorisees..";
       const newField: Field = {
