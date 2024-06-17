@@ -1,7 +1,7 @@
 import { FunctionComponent, useState, useEffect } from "react";
 import { Link, useParams } from "react-router-dom";
 import Pokemon from "../models/pokemon";
-import POKEMONS from "../models/mock-pokemon";
+//import POKEMONS from "../models/mock-pokemon";
 import { formatDate } from "../helpers/formatDate";
 import formatType from "../helpers/formatType";
 
@@ -13,10 +13,11 @@ const PokemonsDetail: FunctionComponent = () => {
   const [pokemon, setPokemon] = useState<Pokemon | null>(null);
 
   useEffect(() => {
-    const foundPokemon = POKEMONS.find(
-      (pokemon) => pokemon.id.toString() === id
-    );
-    setPokemon(foundPokemon || null);
+    fetch(`http://localhost:3001/pokemons/${id}`)
+      .then((response) => response.json())
+      .then((pokemon) => {
+        pokemon.id && setPokemon(pokemon);
+      });
   }, [id]);
 
   return (

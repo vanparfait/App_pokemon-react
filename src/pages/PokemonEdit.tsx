@@ -1,7 +1,7 @@
 import { FunctionComponent, useState, useEffect } from "react";
 
 import Pokemon from "../models/pokemon";
-import POKEMONS from "../models/mock-pokemon";
+//import POKEMONS from "../models/mock-pokemon";
 import PokemonForm from "../components/PokemonForm/PokemonForm";
 import { useParams } from "react-router-dom";
 
@@ -13,10 +13,11 @@ const PokemonEdit: FunctionComponent = () => {
   const { id } = useParams<Params>();
 
   useEffect(() => {
-    const foundPokemon = POKEMONS.find(
-      (pokemon) => pokemon.id.toString() === id
-    );
-    setPokemon(foundPokemon || null);
+    fetch(`http://localhost:3001/pokemons/${id}`)
+      .then((response) => response.json())
+      .then((pokemon) => {
+        pokemon.id && setPokemon(pokemon);
+      });
   }, [id]);
 
   return (
