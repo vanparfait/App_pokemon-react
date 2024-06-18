@@ -162,6 +162,11 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
     const isFormValid = validateForm();
 
     if (isFormValid) {
+      // pokemon.name=form.name.value
+      // pokemon.hp=form.hp.value
+      // pokemon.cp=form.cp.value
+      // pokemon.types=form.types.value
+
       navigate(`/pokemons/${pokemon.id}`);
     } else {
       console.log("jjjjjj");
