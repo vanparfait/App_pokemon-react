@@ -9,7 +9,8 @@ const PokemonList: FunctionComponent = () => {
   useEffect(() => {
     fetch("http://localhost:3001/pokemons")
       .then((response) => response.json())
-      .then((pokemons) => setPokemons(pokemons));
+      .then((pokemons) => setPokemons(pokemons))
+      .catch((err) => console.log(err));
   }, []);
 
   return (
