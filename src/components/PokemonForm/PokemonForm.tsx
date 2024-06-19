@@ -2,12 +2,13 @@ import { FunctionComponent, useState } from "react";
 import formatType from "../../helpers/formatType";
 import Pokemon from "../../models/pokemon";
 import { useNavigate } from "react-router-dom";
+import PokemonService from "../../services/pokemonServive";
 
 type Props = {
   pokemon: Pokemon;
 };
 type Field = {
-  value?: unknown;
+  value?: any;
   error?: string;
   isValid?: boolean;
 };
@@ -42,11 +43,17 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
     "Psy",
   ];
 
+  // const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  //   const fieldName: string = e.target.name;
+  //   const fieldValue: string = e.target.value;
+  //   const newField: Field = { [fieldName]: { value: fieldValue } };
+  //   setForm({ ...form, ...newField });
+  // };
   const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const fieldName: string = e.target.name;
     const fieldValue: string = e.target.value;
-    const newField: Field = { [fieldName]: { value: fieldValue } };
-    setForm({ ...form, ...newField });
+    const newField: Field = { value: fieldValue, isValid: true };
+    setForm({ ...form, [fieldName]: newField }); // Correction: Syntaxe correcte pour mettre à jour l'état
   };
 
   const selectType = (
@@ -70,10 +77,31 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
 
     setForm({ ...form, ...{ types: newField } });
   };
+  // const selectType = (
+  //   type: string,
+  //   e: React.ChangeEvent<HTMLInputElement>
+  // ): void => {
+  //   const checked = e.target.checked;
+  //   let newTypes = [...(form.types.value as string[])];
+
+  //   if (checked) {
+  //     newTypes.push(type);
+  //   } else {
+  //     newTypes = newTypes.filter((currentType) => currentType !== type);
+  //   }
+
+  //   setForm({ ...form, types: { value: newTypes, isValid: true } }); // Correction: Syntaxe correcte pour mettre à jour l'état
+  // };
 
   const hasType = (type: string): boolean => {
     return (form.types.value as string[]).includes(type);
   };
+  // const hasType = (type: string): boolean => {
+  //   const currentTypes = form.types.value as string[]; // Assurez-vous que form.types.value est bien un tableau de chaînes
+
+  //   // Vérifiez si currentTypes est défini et non null avant de vérifier `includes`
+  //   return currentTypes && currentTypes.includes(type);
+  // };
 
   const validateForm = () => {
     let newForm: Form = form;
@@ -142,7 +170,8 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
   const isTypesValid = (type: string): boolean => {
     // Cas n°1: Le pokémon a un seul type, qui correspond au type passé en paramètre.
     // Dans ce cas on revoie false, car l'utilisateur ne doit pas pouvoir décoché ce type (sinon le pokémon aurait 0 type, ce qui est interdit)
-    if ((form.types.value as string).length === 1 && hasType(type)) {
+    const currentTypes = form.types.value as string[];
+    if (currentTypes.length === 1 && hasType(type)) {
       return false;
     }
 
@@ -162,14 +191,13 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
     const isFormValid = validateForm();
 
     if (isFormValid) {
-      // pokemon.name=form.name.value
-      // pokemon.hp=form.hp.value
-      // pokemon.cp=form.cp.value
-      // pokemon.types=form.types.value
-
-      navigate(`/pokemons/${pokemon.id}`);
-    } else {
-      console.log("jjjjjj");
+      pokemon.name = form.name.value;
+      pokemon.hp = form.hp.value;
+      pokemon.cp = form.cp.value;
+      pokemon.types = form.types.value;
+      PokemonService.updatePokemon(pokemon).then(() =>
+        navigate(`/pokemons/${pokemon.id}`)
+      );
     }
   };
 
