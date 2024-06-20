@@ -205,6 +205,8 @@ const PokemonForm: FunctionComponent<Props> = ({ pokemon }) => {
     PokemonService.deletePokemon(pokemon).then(() => navigate("/pokemons"));
   };
 
+  //const addPokemon = PokemonService.addPokemon(pokemon).then(() =>navigate("/pokemons") )
+
   return (
     <form onSubmit={(e) => handleSubmit(e)}>
       <div className="row">
