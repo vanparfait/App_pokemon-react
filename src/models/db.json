@@ -136,16 +136,6 @@
         "Insecte"
       ],
       "created": "2024-06-24T13:12:31.168Z"
-    },
-    {
-      "id": 1719237643157,
-      "hp": 100,
-      "cp": 10,
-      "name": "name",
-      "picture": "http://...",
-      "types": [
-        "Normal"
-      ]
     }
   ]
 }
