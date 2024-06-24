@@ -1,18 +1,110 @@
-# 💫 About Me:
-I'm currently working with PSE Consulting as a Fronted developer<br>I'm currently learning React and Python<br>I'm open to freelancing projects<br>I like to share my knowledge and learn something new every day
+# Pokémon App
 
+Une application de gestion de Pokémon utilisant React, TypeScript et JSON Server pour le backend. Cette application permet de rechercher, ajouter, modifier et supprimer des Pokémon.
 
-## 🌐 Socials:
-[![Facebook](https://img.shields.io/badge/Facebook-%231877F2.svg?logo=Facebook&logoColor=white)](https://facebook.com/vanparfait@gmail.com) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/linkedin.com/in/parfait-nguemechia-05011a219) [![X](https://img.shields.io/badge/X-black.svg?logo=X&logoColor=white)](https://x.com/Parfait) 
+## Table des matières
 
-# 💻 Tech Stack:
-![HTML5](https://img.shields.io/badge/html5-%23E34F26.svg?style=for-the-badge&logo=html5&logoColor=white) ![CSS3](https://img.shields.io/badge/css3-%231572B6.svg?style=for-the-badge&logo=css3&logoColor=white) ![JavaScript](https://img.shields.io/badge/javascript-%23323330.svg?style=for-the-badge&logo=javascript&logoColor=%23F7DF1E) ![TypeScript](https://img.shields.io/badge/typescript-%23007ACC.svg?style=for-the-badge&logo=typescript&logoColor=white) ![Python](https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54) ![Firebase](https://img.shields.io/badge/firebase-%23039BE5.svg?style=for-the-badge&logo=firebase) ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB) ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white) ![React Hook Form](https://img.shields.io/badge/React%20Hook%20Form-%23EC5990.svg?style=for-the-badge&logo=reacthookform&logoColor=white) ![React Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white) ![TailwindCSS](https://img.shields.io/badge/tailwindcss-%2338B2AC.svg?style=for-the-badge&logo=tailwind-css&logoColor=white) ![Vite](https://img.shields.io/badge/vite-%23646CFF.svg?style=for-the-badge&logo=vite&logoColor=white) ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB) ![SASS](https://img.shields.io/badge/SASS-hotpink.svg?style=for-the-badge&logo=SASS&logoColor=white) ![Styled Components](https://img.shields.io/badge/styled--components-DB7093?style=for-the-badge&logo=styled-components&logoColor=white) ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) ![Gimp](https://img.shields.io/badge/Gimp-657D8B?style=for-the-badge&logo=gimp&logoColor=FFFFFF)
-# 📊 GitHub Stats:
-![](https://github-readme-stats.vercel.app/api?username=Nguemechia Parfait&theme=dark&hide_border=false&include_all_commits=true&count_private=true)<br/>
-![](https://github-readme-streak-stats.herokuapp.com/?user=Nguemechia Parfait&theme=dark&hide_border=false)<br/>
-![](https://github-readme-stats.vercel.app/api/top-langs/?username=Nguemechia Parfait&theme=dark&hide_border=false&include_all_commits=true&count_private=true&layout=compact)
+- [Fonctionnalités](#fonctionnalités)
+- [Installation](#installation)
+- [Utilisation](#utilisation)
+- [Scripts Disponibles](#scripts-disponibles)
+- [Structure du Projet](#structure-du-projet)
+- [Contribuer](#contribuer)
+- [License](#license)
 
----
-[![](https://visitcount.itsvg.in/api?id=Nguemechia Parfait&icon=0&color=0)](https://visitcount.itsvg.in)
+## Fonctionnalités
 
-<!-- Proudly created with GPRM ( https://gprm.itsvg.in ) -->
+- Afficher une liste de Pokémon.
+- Rechercher un Pokémon par nom.
+- Ajouter un nouveau Pokémon.
+- Modifier un Pokémon existant.
+- Supprimer un Pokémon.
+
+## Installation
+
+1. **Cloner le dépôt** :
+
+   ```bash
+   git clone https://github.com/votre-utilisateur/pokemon-app.git
+   cd pokemon-app
+   ```
+
+2. **Installer les dépendances** :
+
+   ```bash
+   npm install
+   ```
+
+3. **Configurer le backend** :
+
+   Utilisez JSON Server pour simuler une API REST :
+
+   ```bash
+   npx json-server --watch db.json --port 3001
+   ```
+
+   Le fichier `db.json` devrait contenir des données initiales pour les Pokémon, par exemple :
+
+   ```json
+   {
+     "pokemons": [
+       {
+         "id": 1,
+         "name": "Bulbasaur",
+         "picture": "https://assets.pokemon.com/assets/cms2/img/pokedex/detail/001.png",
+         "created": "2023-01-01"
+       }
+       // Autres Pokémon...
+     ]
+   }
+   ```
+
+## Utilisation
+
+1. **Démarrer l'application** :
+
+   ```bash
+   npm run dev
+   ```
+
+   L'application sera accessible à l'adresse `http://localhost:5173`.
+
+2. **Naviguer dans l'application** :
+
+   - Accueil : Affiche une liste de tous les Pokémon.
+   - Recherche : Utilisez la barre de recherche pour trouver un Pokémon par nom.
+   - Détails : Cliquez sur un Pokémon pour voir plus de détails.
+   - Ajouter : Utilisez le formulaire pour ajouter un nouveau Pokémon.
+   - Modifier : Modifiez les informations d'un Pokémon existant.
+   - Supprimer : Supprimez un Pokémon de la liste.
+
+## Scripts Disponibles
+
+Dans le répertoire du projet, vous pouvez exécuter :
+
+- `npm run dev` : Démarre l'application en mode développement.
+- `npm run build` : Construit l'application pour la production dans le dossier `build`.
+- `npm test` : Lance les tests.
+- `npx json-server --watch db.json --port 3001` ou `npm run start:api` : Démarre JSON Server pour simuler une API REST.
+
+## Structure du Projet
+
+```plaintext
+pokemon-app/
+├── public/
+├── src/
+│   ├── components/
+│   │   ├── PokemonCard/
+│   │   │   └── PokemonCard.tsx
+│   ├── models/
+│   │   └── pokemon.ts
+│   ├── services/
+│   │   └── pokemonService.ts
+│   ├── App.tsx
+│   ├── index.tsx
+│   └── ...
+├── db.json
+├── package.json
+├── README.md
+└── ...
+```
