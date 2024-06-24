@@ -5,6 +5,7 @@ import Pokemon from "../models/pokemon";
 import PokemonForm from "../components/PokemonForm/PokemonForm";
 import { useParams } from "react-router-dom";
 import PokemonService from "../services/pokemonServive";
+import Loader from "../components/Loader";
 
 type Params = { id: string };
 
@@ -45,7 +46,9 @@ const PokemonEdit: FunctionComponent = () => {
           <PokemonForm pokemon={pokemon} isEditForm={true}></PokemonForm>
         </div>
       ) : (
-        <h4 className="center">Aucun pokémon à afficher !</h4>
+        <h4 className="center">
+          <Loader />
+        </h4>
       )}
     </div>
   );
