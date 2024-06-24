@@ -21,7 +21,7 @@ export default class PokemonService {
     return fetch(`http://localhost:3001/pokemons/${pokemon.id}`, {
       method: "PUT",
       body: JSON.stringify(pokemon),
-      headers: { "Content-Type": "application/json" }, // Correction ici
+      headers: { "Content-Type": "application/json" }, 
     })
     .then((response) => response.json())
     .catch((error) => this.handleError(error));
@@ -36,6 +36,7 @@ export default class PokemonService {
   }
 
   static addPokemon (pokemon: Pokemon): Promise<Pokemon> {
+    delete pokemon.created
     return  fetch("http://localhost:3001/pokemons",{
       method:"POST",
       headers:{"Content-Type":"application/json"},body:JSON.stringify(pokemon)

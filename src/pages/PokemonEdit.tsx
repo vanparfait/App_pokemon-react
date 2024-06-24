@@ -37,27 +37,12 @@ const PokemonEdit: FunctionComponent = () => {
     PokemonService.getPokemon(id).then((pokemon) => setPokemon(pokemon));
   }, [id]);
 
-  // if (error) {
-  //   return (
-  //     <div
-  //       style={{
-  //         color: "red",
-  //         fontSize: "4rem",
-  //         width: "50%",
-  //         margin: "0 auto",
-  //       }}
-  //     >
-  //       {error}
-  //     </div>
-  //   );
-  // }
-
   return (
     <div>
       {pokemon ? (
         <div className="row">
           <h2 className="header center">Éditer {pokemon.name}</h2>
-          <PokemonForm pokemon={pokemon}></PokemonForm>
+          <PokemonForm pokemon={pokemon} isEditForm={true}></PokemonForm>
         </div>
       ) : (
         <h4 className="center">Aucun pokémon à afficher !</h4>
