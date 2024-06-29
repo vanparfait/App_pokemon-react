@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import PageNotFound from "./pages/PageNotFound";
 import PokemonEdit from "./pages/PokemonEdit";
 import PokemonAdd from "./pages/PokemonAdd";
+import Login from "./pages/Login";
 
 const App: FunctionComponent = () => {
   return (
@@ -20,6 +21,7 @@ const App: FunctionComponent = () => {
         </nav>
         <Routes>
           <Route path="/" element={<PokemonList />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/pokemons" element={<PokemonList />} />
           <Route path="/pokemons/add" element={<PokemonAdd />} />
           <Route path="/pokemons/:id" element={<PokemonsDetail />} />
